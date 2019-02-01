@@ -1,4 +1,4 @@
-//© A+ Computer Science
+//ï¿½ A+ Computer Science
 //www.apluscompsci.com
 
 //Name -
@@ -28,7 +28,7 @@ public class StarsAndStripes
 
    public void printTwoBlankLines()
    {
-	   out.println("");
+	   out.println("" );
 	   out.println("");
    }
    
