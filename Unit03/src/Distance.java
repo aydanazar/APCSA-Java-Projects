@@ -12,17 +12,25 @@ import static java.lang.Math.*;
 
 public class Distance
 {
+	//instance variables
 	private int xOne,yOne,xTwo,yTwo;
 	private double distance;
 
+	//constructor 1 initializes
 	public Distance()
 	{
+		setCoordinates(0,0,0,0);
+		distance = 0.0;
 	}
 
+	//constructor 2 passes in data
 	public Distance(int x1, int y1, int x2, int y2)
 	{
+		setCoordinates(x1,y1,x2,y2);
+		distance = 0.0;
 	}
 
+	//setter or modifier
 	public void setCoordinates(int x1, int y1, int x2, int y2)
 	{
 		xOne = x1;
@@ -31,23 +39,21 @@ public class Distance
 		yTwo = y2;
 	}
 
+	//calculator function
 	public void calcDistance()
 	{
+		distance = Math.sqrt((xTwo - xOne)*(xTwo - xOne) + (yTwo - yOne)*(yTwo - yOne));
 	}
 	
+	//accessor or getter --> accesses and returns instance variable = distance
 	public double getDistance()
 	{
-		return 0.0;
+		return distance;
 	}
 	
-	public void print()
-	{
-	}
-	
-	//complete print or the toString
-
+	//accessor or getter --> accesses and returns instance variable = distance
 	public String toString()
 	{
-		return "";
+		return "distance == " + getDistance();
 	}
 }
