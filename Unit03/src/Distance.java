@@ -54,6 +54,6 @@ public class Distance
 	//accessor or getter --> accesses and returns instance variable = distance
 	public String toString()
 	{
-		return "distance == " + getDistance();
+		return "distance == " + getDistance() + "\n\n";
 	}
 }
