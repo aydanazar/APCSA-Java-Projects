@@ -5,8 +5,14 @@
 
 public class AvgLen
 {
-   public static double go( String a, String b )
+	
+	private double lengthA, lengthB, average;
+	
+   public double go( String a, String b )
 	{
-		return 0;
+	   lengthA = a.length();
+	   lengthB = b.length();
+	   average = (lengthA + lengthB) / 2;
+	   return average;
 	}
 }
