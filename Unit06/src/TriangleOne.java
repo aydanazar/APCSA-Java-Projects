@@ -15,6 +15,7 @@ public class TriangleOne
 
 	public TriangleOne(String s)
 	{
+		words = s;
 	}
 
 	public void setWord(String s)
