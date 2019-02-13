@@ -15,14 +15,26 @@ public class TriangleOne
 
 	public TriangleOne(String s)
 	{
-		words = s;
+		setWord(s);
 	}
 
 	public void setWord(String s)
 	{
+		word = s;
+	}
+	
+	public String makeTriangle()
+	{
+		String triangle = "";
+		for(int i = word.length()-1; i >= 0; i--)
+		{
+			triangle = triangle + word.substring(0, i) + "\n";
+		}
+		return triangle;
 	}
 
-	public void print( )
+	public String toString()
 	{
+		return makeTriangle();
 	}
 }
