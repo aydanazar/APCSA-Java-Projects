@@ -30,7 +30,7 @@ public class LetterRemover
 
 	public String removeLetters()
 	{
-		String cleaned=sentence;
+		String cleaned = sentence;
 		int loc = cleaned.indexOf(lookFor);
 		while(loc > -1)
 		{
@@ -42,6 +42,6 @@ public class LetterRemover
 
 	public String toString()
 	{
-		return sentence + " - letter to remove " + lookFor + "\n" + removeLetters();
+		return sentence + " - letter to remove " + lookFor + "\n" + removeLetters() + "\n\n";
 	}
 }

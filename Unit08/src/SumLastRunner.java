@@ -6,6 +6,7 @@
 public class SumLastRunner
 {
 	public static void main( String args[] )
-	{											
+	{			
+		RaySumLast s = new RaySumLast();
 	}
 }
