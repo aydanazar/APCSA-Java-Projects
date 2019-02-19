@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author aydanayebnazar
- *
- */
-module MagpieCaseStudy {
-}
