@@ -30,13 +30,9 @@ public class Magpie3
 	public String getResponse(String statement)
 	{
 		String response = "";
-		if (statement.length() == 0)
+		if ((statement.trim()).length() == 0)
 		{
 			response = "Say something, please.";
-		}
-		else if (findKeyword(statement, "no") >= 0)
-		{
-			response = "Why so negative?";
 		}
 		else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
@@ -44,6 +40,32 @@ public class Magpie3
 				|| findKeyword(statement, "brother") >= 0)
 		{
 			response = "Tell me more about your family.";
+		}
+		else if (findKeyword(statement, "cat") >= 0
+				|| findKeyword(statement, "dog") >= 0
+				|| findKeyword(statement, "hamster") >= 0)
+		{
+			response = "Tell me more about your pets.";
+		}
+		else if (findKeyword(statement, "Mr. Mauro") >= 0)
+		{
+			response = "He sounds like a good teacher.";
+		}
+		else if (findKeyword(statement, "friend") >= 0)
+		{
+			response = "Tell me more about your friends.";
+		}
+		else if (findKeyword(statement, "school") >= 0)
+		{
+			response = "School is a great place to learn.";
+		}
+		else if (findKeyword(statement, "funny") >= 0)
+		{
+			response = "You have a great sense of humor.";
+		}
+		else if (findKeyword(statement, "no") >= 0)
+		{
+			response = "Why so negative?";
 		}
 		else
 		{

@@ -20,8 +20,23 @@ public class StringExplorer
 		System.out.println ("sample.toLowerCase() = " + lowerCase);
 		System.out.println ("After toLowerCase(), sample = " + sample);
 		
+		int pos = sample.indexOf("slow");
+		if(pos != -1)
+			System.out.println("slow is found at position " + pos);
+		else
+			System.out.println("slow is not found");
+		
 		//  Try other methods here:
-
+		String sentence = "Computer Science is the best, the greatest, and the most wonderful subject to study!";
+		int sum = 0;
+		for (int i = 0; i < sentence.length(); i++)
+		{
+			if (sentence.indexOf("the", i) == i)
+			{
+				sum++;
+			}
+		}
+		System.out.println("The word THE appears " + sum + " times.");
 	}
 
 }
