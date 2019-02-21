@@ -10,24 +10,36 @@ public class BiggestDouble
 
 	public BiggestDouble()
 	{
-		this(0,0,0,0);
+		setDoubles(0,0,0,0);
 	}
 
 	public BiggestDouble(double a, double b, double c, double d)
 	{
+		setDoubles(a,b,c,d);
 	}
 
 	public void setDoubles(double a, double b, double c, double d)
 	{
+		one = a;
+		two = b;
+		three = c;
+		four = d;
 	}
 
 	public double getBiggest()
 	{
-		return 0.0;
+		double biggest = one;
+		if (two > biggest)
+			biggest = two;
+		if (three > biggest)
+			biggest = three;
+		if (four > biggest)
+			biggest = four;
+		return biggest;
 	}
 
 	public String toString()
 	{
-	   return "";
+	   return "" + one + " " + two + " " + three + " " + four + "\nbiggest = " + getBiggest() + "\n";
 	}
 }
