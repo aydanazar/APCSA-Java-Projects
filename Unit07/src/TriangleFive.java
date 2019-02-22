@@ -17,7 +17,7 @@ public class TriangleFive
 
 	public TriangleFive(char c, int amt)
 	{
-		setLetter(letter);
+		setLetter(c);
 		setAmount(amt);
 	}
 
@@ -34,14 +34,27 @@ public class TriangleFive
 	public String toString()
 	{
 		String output="";
-		while (amount > 0) {
-			for (int i = amount; i > 0; i--) {
-				output += "" + (char)letter;
+		int originalAmount = amount;
+		char originalLetter = letter;
+		
+		
+		//prints [amount] lines of letters
+		for (int n = 1; n <= originalAmount; n++) {
+			int varyingAmount = amount;
+			char varyingLetter = letter;
+			
+			//prints one line of letters
+			while (varyingAmount > 0) {
+				for (int i = varyingAmount; i > 0; i--) {
+					output += varyingLetter;
+				}
+				output += " ";
+				varyingLetter += 1;
+				varyingAmount -= 1;
 			}
-			output += " ";
-			letter += 1;
-			amount -= 1;
+		output += "\n";
 		}
+		
 		return output;
 	}
 }
