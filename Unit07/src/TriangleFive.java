@@ -35,24 +35,22 @@ public class TriangleFive
 	{
 		String output="";
 		int originalAmount = amount;
-		char originalLetter = letter;
+		int printLetter = letter;
 		
-		
-		//prints [amount] lines of letters
-		for (int n = 1; n <= originalAmount; n++) {
-			int varyingAmount = amount;
-			char varyingLetter = letter;
-			
-			//prints one line of letters
-			while (varyingAmount > 0) {
-				for (int i = varyingAmount; i > 0; i--) {
-					output += varyingLetter;
+		for (int times = 0; times < originalAmount; times++) {
+			for (int i = 0; i < amount; i++) {
+				for (int a = originalAmount; a > i; a--) {
+					printLetter = (int)letter + i;
+					if (printLetter > 90)
+					{
+						printLetter -= 26;
+					}
+					output += (char)(printLetter);
 				}
 				output += " ";
-				varyingLetter += 1;
-				varyingAmount -= 1;
 			}
-		output += "\n";
+			amount--;
+			output += "\n";
 		}
 		
 		return output;
