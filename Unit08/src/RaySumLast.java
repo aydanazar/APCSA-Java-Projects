@@ -5,7 +5,7 @@
 
 public class RaySumLast
 {
-	public static int go(int[] ray)
+	public int go(int[] ray)
 	{
 		if(ray.length == 0)
 		{
