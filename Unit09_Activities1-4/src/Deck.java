@@ -20,7 +20,6 @@ public class Deck {
 	 */
 	private int size;
 
-
 	/**
 	 * Creates a new <code>Deck</code> instance.<BR>
 	 * It pairs each element of ranks with each element of suits,
@@ -31,6 +30,14 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		this.cards = new ArrayList<Card>();
+		for (int n = 0; n < suits.length; n++) {
+			for (int i = 0; i < ranks.length; i++) {
+				size++;
+				Card addCard = new Card(ranks[i], suits[n], values[i]);
+				this.cards.add(addCard);
+			}
+		}
 	}
 
 
@@ -40,6 +47,10 @@ public class Deck {
 	 */
 	public boolean isEmpty() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		if (size == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -48,6 +59,7 @@ public class Deck {
 	 */
 	public int size() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		return size;
 	}
 
 	/**
@@ -65,6 +77,12 @@ public class Deck {
 	 */
 	public Card deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		if (!isEmpty()) {
+			int index = size - 1;
+			size--;
+			return cards.get(index);
+		}
+		return null;
 	}
 
 	/**
