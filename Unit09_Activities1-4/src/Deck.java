@@ -11,6 +11,7 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
+//  private Card[] cards;
 	private List<Card> cards;
 
 	/**
@@ -28,16 +29,32 @@ public class Deck {
 	 * @param suits is an array containing all of the card suits.
 	 * @param values is an array containing all of the card point values.
 	 */
+/*  public Deck(String[] ranks, String[] suits, int[] values) {
+ *     cards = new Card[ranks.length*suits.length];
+ *     System.out.println(ranks.length + " " + suits.length + " " + values.length):
+ *     for (int i = 0; i < ranks.length; i++){
+ *         for (int j = 0; j< suits.length; j++){
+ *         int cardIndex = (suits.length)*i + j;
+ *         System.out.println(i+" "+j+" " + cardIndex);
+ *         cards[cardIndex] = new Card(ranks[i], suits[j], values[i]):
+ *         }
+ *      }
+ *      size = cards.length;
+ *      System.out.println(Arrays.toString(cards));
+ *      shuffle();
+ * 
+ */
+	
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
 		this.cards = new ArrayList<Card>();
 		for (int n = 0; n < suits.length; n++) {
-			for (int i = 0; i < ranks.length; i++) {
-				size++;
-				Card addCard = new Card(ranks[i], suits[n], values[i]);
-				this.cards.add(addCard);
+			for (String suitString : suits) {
+				cards.add(new Card(ranks[n], suitString, values[n]));
 			}
 		}
+		size = cards.size();
+		shuffle();
 	}
 
 
@@ -67,8 +84,29 @@ public class Deck {
 	 * and reset the size to represent the entire deck.
 	 */
 	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+	for (int k = cards.size() - 1; k > 0; k--) {
+		int howMany = k + 1;
+		int start = 0;
+		int randPos = (int) (Math.random() * howMany) + start;
+		Card temp = cards.get(k);
+		cards.set(k, cards.get(randPos));
+		cards.set(randPos,temp);
+		}
 	}
+
+	
+/*	public void shuffle() {
+	for (int k = cards.length - 1; k > 0; k--) {
+		int howMany = k + 1;
+		int start = 0;
+		int randPos = (int) (Math.random() * howMany) + start;
+		Card temp = cards[k];
+		cards[k] = cards[randPos];
+		cards[randPos] = temp;
+		size = cards.length;
+		}
+	}
+*/
 
 	/**
 	 * Deals a card from this deck.
@@ -77,12 +115,13 @@ public class Deck {
 	 */
 	public Card deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		if (!isEmpty()) {
-			int index = size - 1;
-			size--;
-			return cards.get(index);
-		}
-		return null;
+		if (isEmpty()) {
+			return null;
+		}	
+		size--;
+		Card c = cards.get(size);
+//		Card c = cards[size];
+		return c;
 	}
 
 	/**
