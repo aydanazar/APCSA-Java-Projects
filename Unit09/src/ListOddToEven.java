@@ -3,13 +3,30 @@
 //Name -
 //Date -
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListOddToEven
 {
-	public static boolean go( List<Integer> ray )
+	public int go( List<Integer> ray )
 	{
-		return false;
+		int space = 0;
+		boolean isOdd = false;
+		boolean isEven = false;
+		for (int i = 0; i < ray.size(); i++) {
+			if (ray.get(i) % 2 == 1) {
+				isOdd = true;
+				for (int n = i; n < ray.size(); n++) {
+					if (ray.get(n) % 2 == 0) {
+						isEven = true;
+						space = n - i;
+					}
+				}
+				break;
+			}
+		}
+		if (isOdd && isEven) {
+			return space;
+		}
+		return -1;
 	}
 }

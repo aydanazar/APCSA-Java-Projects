@@ -4,12 +4,22 @@
 //Date -
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class ListSumFirst
 {
-	public static int go(List<Integer> ray)
+	public int go(List<Integer> ray)
 	{
-		return 0;
+		int count = 0;
+		boolean isCount = false;
+		for (int i = 0; i < ray.size(); i++) {
+			if (ray.get(i) > ray.get(0)) {
+				count += ray.get(i);
+				isCount = true;
+			}
+		}
+		if (isCount) {
+			return count;
+		}
+		else return -1;
 	}
 }
