@@ -15,7 +15,7 @@ public class DoggiesRunner
 		int size = keyboard.nextInt();
 		Doggies pack = new Doggies(size);
 
-		for(int i=0; i<size;i++)
+		for(int i=0; i < size; i++)
 		{
 			System.out.print("Enter the age :: ");
 			int age = keyboard.nextInt();
