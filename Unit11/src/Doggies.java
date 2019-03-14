@@ -15,7 +15,7 @@ public class Doggies
 		//point pups at a new array of Dog
 		pups = new Dog[size];
 		ages = new int[size];
-		names = new String [size];
+		names = new String[size];
 	}
 	
 	public void set(int spot, int age, String name)
@@ -23,7 +23,7 @@ public class Doggies
 		//put a new Dog in the array at spot 
 		//make sure spot is in bounds
 		Dog d = new Dog(age, name);
-		if (spot > 0 && spot < pups.length) {
+		if (spot >= 0 && spot < pups.length) {
 			pups[spot] = d;
 			ages[spot] = age;
 			names[spot] = name;
