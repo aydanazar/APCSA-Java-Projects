@@ -14,11 +14,11 @@ public class TriangleWordRunner
 		String choice = "";
 		
 		do {
-			System.out.println("Enter a word:: ");
+			System.out.print("Enter a word:: ");
 			String word = keyboard.next();
-			triangle.printTriangle();
+			triangle.printTriangle(word);
 			
-			System.out.println("Do you want to enter more sample input? ");
+			System.out.print("\nDo you want to enter more sample input? ");
 			choice = keyboard.next();
 		}while(choice.equals("y") || choice.equals("Y"));
 
