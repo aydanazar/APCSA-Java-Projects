@@ -98,5 +98,43 @@ public class IntArrayWorker
       }
     }
   }
- 
+  
+  public int getCount(int n)
+  {
+	  int count = 0;
+	  for(int[] r : matrix)
+	  {
+		  for(int c : r)
+		  {
+			  if(c == n) count++;
+		  }
+	  }
+	  return count;
+  }
+
+  public int getLargest()
+  {
+	  int largest = matrix[0][0];
+	  for(int[] r : matrix)
+	  {
+		  for(int c : r)
+		  {
+			  if(c > largest) largest = c;
+		  }
+	  }
+	  return largest;
+  }
+  
+  public int getColTotal(int n)
+  {
+	  int sum = 0;
+	  for(int i = 0; i < matrix.length; i++)
+	  {
+		  for(int j = 0; j < matrix[i].length; j++)
+		  {
+			  if(j == n) sum += matrix[i][j];
+		  }
+	  }
+	  return sum;
+  }
 }
