@@ -43,7 +43,7 @@ public class Breakout extends Canvas implements KeyListener, Runnable
 
    public void paint(Graphics window)
    {
-		//set up the double buffering to make the game animation nice and smooth
+	 //set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
 		//take a snap shop of the current screen and same it as an image
@@ -53,227 +53,189 @@ public class Breakout extends Canvas implements KeyListener, Runnable
 
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
+		
 		Graphics graphToBack = back.createGraphics();
 
 		ball.moveAndDraw(graphToBack);
 		paddle.draw(graphToBack);
 		
-		for(Block b : blocks)
+		if(blocks.size() == 0)
 		{
-			b.draw(graphToBack);
+			drawBlocks();
+			ball.draw(graphToBack, Color.WHITE);
+			paddle.draw(graphToBack,Color.WHITE);
+			ball.setPos(400,300);
+			paddle.setPos(420,300);
+			
 		}
-
-		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=10 && ball.getX()<=780))
-		{
+		for(int i = 0; i < blocks.size();i ++)
+		   {
+			   blocks.get(i).draw(graphToBack);
+		   }
+		
+		
+	
+		
+		//see if ball hits right or left wall
+		if(!(ball.getX() >= 10 && ball.getX() <= 780))
+		{	
+			
 			ball.setXSpeed(-ball.getXSpeed());
 		}
-	
-		//see if the ball hits top or bottom wall 
-		if(!(ball.getY() >= 10 && ball.getY() <= 580))
+		
+		if(!(ball.getY() >= 10 && ball.getY() <= 560))
 		{
 			ball.setYSpeed(-ball.getYSpeed());
-		}
-
-		//ball hits right side of paddle
-		//add speed
-		if(ball.getX() <= paddle.getX() + paddle.getWidth() + Math.abs(ball.getXSpeed())
-			&& ball.getX() > paddle.getX() + paddle.getWidth()
-				&& (ball.getY() >= paddle.getY() 
-					&& ball.getY() <= paddle.getY() + paddle.getHeight()
-					|| ball.getY() + ball.getHeight() >= paddle.getY() 
-					&& ball.getY() + ball.getHeight() < paddle.getY() + paddle.getHeight()))
-			ball.setXSpeed(-ball.getXSpeed());
 			
+		}
 		
-		//ball hits left side of paddle
-		//subtract speed
-		if(ball.getX() + ball.getWidth() >= paddle.getX() - Math.abs(ball.getXSpeed())
-			&& ball.getX() + ball.getWidth() < paddle.getX()
-				&& (ball.getY() >= paddle.getY() 
-					&& ball.getY() <= paddle.getY() + paddle.getHeight()
-					|| ball.getY() + ball.getHeight() >= paddle.getY() 
-					&& ball.getY() + ball.getHeight() < paddle.getY() + paddle.getHeight()))
-			ball.setXSpeed(-ball.getXSpeed());
+  
+
+		//see if the ball hits the right side of paddle
 		
-				
-		//ball hits top of paddle
-		if(ball.getY() + ball.getHeight() >= paddle.getY() - Math.abs(ball.getYSpeed()) 
-			&& ball.getY() + ball.getHeight() < paddle.getY()
+		if(ball.getX() <= paddle.getX() + paddle.getWidth() + Math.abs(ball.getXSpeed())
+		&& ball.getX() > paddle.getX() + paddle.getWidth()
+		&& (ball.getY() >= paddle.getY() 
+			&& ball.getY() <= paddle.getY() + paddle.getHeight()
+			|| ball.getY() + ball.getHeight() >= paddle.getY() 
+			&& ball.getY() + ball.getHeight() < paddle.getY() + paddle.getHeight()))
+		{
+			//if(ball.getX() <= paddle.getX() + paddle.getWidth() - Math.abs(ball.getXSpeed()))
+			//	ball.setYSpeed(-ball.getYSpeed());
+			//else
+			ball.setXSpeed(-ball.getXSpeed());			
+		}
+		
+			
+		//see if the ball hits the left side paddle
+		if(ball.getX() + ball.getWidth() >= paddle.getX()  - Math.abs(ball.getXSpeed())
+		&& ball.getX() + ball.getWidth() < paddle.getX()
+		&& (ball.getY() >= paddle.getY() 
+			&& ball.getY() <= paddle.getY() + paddle.getHeight()
+			|| ball.getY() + ball.getHeight() >= paddle.getY()
+			&& ball.getY() + ball.getHeight() < paddle.getY() + paddle.getHeight()))
+		{
+	
+				ball.setXSpeed(-ball.getXSpeed());
+			
+		}
+		
+		//see if ball hits top of paddle
+		if(ball.getY() + ball.getHeight() >= paddle.getY()  - Math.abs(ball.getYSpeed())
+				&& ball.getY() + ball.getHeight() < paddle.getY()
 				&& (ball.getX() + ball.getWidth() >= paddle.getX()
 					&& ball.getX() <= paddle.getX() + paddle.getWidth()
-					|| ball.getX() + ball.getWidth() <= paddle.getX() + paddle.getWidth()
-					&& ball.getX() >= paddle.getX())) 
-			ball.setYSpeed(-ball.getYSpeed());
+						|| ball.getX() + ball.getWidth() <= paddle.getX() + paddle.getWidth()
+						&& ball.getX() >= paddle.getX()))
+				ball.setYSpeed(-ball.getYSpeed());
 			
-		//ball hits bottom of paddle
+		
+		
+		// see if ball hits bottom of paddle
+		
 		if(ball.getY() <= paddle.getY() + paddle.getHeight() + Math.abs(ball.getYSpeed())
 			&& ball.getY() >= paddle.getY() + paddle.getHeight()
 			&& (ball.getX() + ball.getWidth() >= paddle.getX()
 					&& ball.getX() <= paddle.getX() + paddle.getWidth()
-					|| ball.getX() + ball.getWidth() <= paddle.getX() + paddle.getWidth()
-					&& ball.getX() >= paddle.getX()))
-			ball.setYSpeed(-ball.getYSpeed());
+						//|| ball.getX() + ball.getWidth() >= paddle.getX() + paddle.getWidth()
+						//&& ball.getX() >= paddle.getX()
+						))
+		{
+			
+			ball.setYSpeed(-ball.getYSpeed());			
+		}
 		
-		//check if ball hits any of the blocks
-		for(int i = 0; i < blocks.size(); i++)
+		
+		//check if it hits the blocks
+		for(int i = 0; i < blocks.size(); i ++)
 		{
 			Block b = blocks.get(i);
+			if(ball.getX() <=b.getX() + b.getWidth() + Math.abs(ball.getXSpeed())
+			&& ball.getX() > b.getX() + b.getWidth()
+			&& (ball.getY() >= b.getY() 
+				&& ball.getY() <= b.getY() + b.getHeight()
+				|| ball.getY() + ball.getHeight() >= b.getY() 
+				&& ball.getY() + ball.getHeight() < b.getY() + b.getHeight()))
+			{
+				//if(ball.getX() <= paddle.getX() + paddle.getWidth() - Math.abs(ball.getXSpeed()))
+				//	ball.setYSpeed(-ball.getYSpeed());
+				//else
+				
+				b.setColor(Color.WHITE);
+				b.draw(graphToBack);
+				blocks.remove(i);
+				ball.setXSpeed(-ball.getXSpeed());
+				
+			}
 			
-			//collides on bottom
+				
+			//see if the ball hits the left side paddle
+			if(ball.getX() + ball.getWidth() >= b.getX()  - Math.abs(ball.getXSpeed())
+			&& ball.getX() + ball.getWidth() < b.getX()
+			&& (ball.getY() >= b.getY() 
+				&& ball.getY() <= b.getY() + b.getHeight()
+				|| ball.getY() + ball.getHeight() >= b.getY()
+				&& ball.getY() + ball.getHeight() < b.getY() + b.getHeight()))
+			{
+				
+				b.setColor(Color.WHITE);
+				b.draw(graphToBack);
+				blocks.remove(i);
+					ball.setXSpeed(-ball.getXSpeed());
+					
+				
+			}
+			
+			//see if ball hits top of paddle
+			if(ball.getY() + ball.getHeight() >= b.getY()  - Math.abs(ball.getYSpeed())
+					&& ball.getY() + ball.getHeight() < b.getY()
+					&& (ball.getX() + ball.getWidth() >= b.getX()
+						&& ball.getX() <= b.getX() + b.getWidth()
+							|| ball.getX() + ball.getWidth() <= b.getX() + b.getWidth()
+							&& ball.getX() >= b.getX()))
+			{
+				
+				b.setColor(Color.white);
+				b.draw(graphToBack);
+				blocks.remove(i);
+				ball.setYSpeed(-ball.getYSpeed());
+			}
+					
+					
+				
+			
+			
+			// see if ball hits bottom of paddle
+			
 			if(ball.getY() <= b.getY() + b.getHeight() + Math.abs(ball.getYSpeed())
-				&& ball.getY() > b.getY() + b.getHeight()
-				&& (ball.getX() >= b.getX() 
-					&& ball.getX() <= b.getX() + b.getWidth()
-					|| ball.getX() + ball.getWidth() >= b.getX() 
-					&& ball.getX() + ball.getWidth() < b.getX() + b.getWidth()))
+				&& ball.getY() >= b.getY() + b.getHeight()
+				&& (ball.getX() + ball.getWidth() >= b.getX()
+						&& ball.getX() <= b.getX() + b.getWidth()
+							//|| ball.getX() + ball.getWidth() >= paddle.getX() + paddle.getWidth()
+							//&& ball.getX() >= paddle.getX()
+							))
 			{
-				ball.setYSpeed(-ball.getYSpeed());
-				disappear(b, i, graphToBack);
-				System.out.println(i + " bottom");
+				
+				b.setColor(Color.white);
+				b.draw(graphToBack);
+				blocks.remove(i);
+				ball.setYSpeed(-ball.getYSpeed());			
 			}
 			
-			//collides on top
-			if(ball.getY() + ball.getHeight() >= b.getY() - Math.abs(ball.getYSpeed())
-				&& ball.getY() + ball.getHeight() < b.getY()
-				&& (ball.getX() >= b.getX() 
-					&& ball.getX() <= b.getX() + b.getWidth()
-					|| ball.getX() + ball.getWidth() >= b.getX() 
-					&& ball.getX() + ball.getWidth() < b.getX() + b.getWidth()))
-			{
-				ball.setYSpeed(-ball.getYSpeed());
-				disappear(b, i, graphToBack);
-				System.out.println(i + " top");
-			}
-			
-			//collides on right side
-			if(ball.getX() <= b.getX() + b.getWidth() + Math.abs(ball.getXSpeed())
-				&& ball.getX() > b.getX() + b.getWidth()
-				&& (ball.getY() >= b.getY() 
-					&& ball.getY() <= b.getY() + b.getHeight()
-					|| ball.getY() + ball.getHeight() >= b.getY() 
-					&& ball.getY() + ball.getHeight() <= b.getY() + b.getHeight()))
-			{
-				ball.setXSpeed(-ball.getXSpeed());
-				disappear(b, i, graphToBack);
-				System.out.println(i + " right");
-			}
-			
-			//collides on left side
-			if((ball.getX() + ball.getWidth() >= b.getX() - Math.abs(ball.getXSpeed())
-				&& ball.getX() + ball.getWidth() < b.getX())
-				&& (ball.getY() >= b.getY() 
-					&& ball.getY() <= b.getY() + b.getHeight()
-					|| ball.getY() + ball.getHeight() >= b.getY() 
-					&& ball.getY() + ball.getHeight() <= b.getY() + b.getHeight()))
-			{
-				ball.setXSpeed(-ball.getXSpeed());
-				disappear(b, i, graphToBack);
-				System.out.println(i + " left");
-			}		
 		}
 		
 		//see if the paddles need to be moved
-		if(keys[0]) paddle.moveUpAndDraw(graphToBack); //need to use graphToBack instead of window 
-		if(keys[1]) paddle.moveDownAndDraw(graphToBack);
-		if(keys[2]) paddle.moveLeftAndDraw(graphToBack);
-		if(keys[3]) paddle.moveRightAndDraw(graphToBack);
-
-		twoDGraph.drawImage(back, null, 0, 0);
-	}
-   
-    public void drawBlocks()
-    {
-    	int begX = 10, endX = 780;
-    	int begY = 10, endY = 580;
-    	int blockW = 50, blockH = 20;
-    	int posX = 10, posY = 10;
-    	int gap = 5;
-    	
-    	//upper row
-    	for(int i = 0; i < 2; i++) 
-    	{
-    		while(posX <= endX)
-        	{
-        		blocks.add(new Block(posX, posY, blockW, blockH));
-        		posX += blockW + gap;  		
-        	}
-    		posY += blockH + gap;
-    		posX = begX;
-    	}
-    	
-    	//lower row
-    	posX = begX; 
-    	posY = endY - 2 * blockH - gap;	
-    	for(int i = 0; i < 2; i++)
-    	{
-    		while(posX <= endX)
-    		{
-    			blocks.add(new Block(posX, posY, blockW, blockH));
-    			posX += blockW + gap;
-    		}
-    		posY += blockH + gap;
-    		posX = begX;
-    	}
-    	
-    	//left side
-    	posX = begX;
-    	posY = begY + blockH * 2 + 2 * gap;
-    	for(int i = 0; i < 2; i++)
-    	{
-    		while(posY <= endY - blockH * 2 - 2 * gap)
-    		{
-    			blocks.add(new Block(posX, posY, blockH, blockW));
-    			posY += blockW + gap;
-    		}
-    		posY = begY + blockH * 2 + 2 * gap;
-    		posX += blockH + gap;
-    	}
-    	
-    	//right side
-    	posX = endX - blockH - gap * 2;
-    	posY = begY + blockH * 2 + 2 * gap;
-    	for(int i = 0; i < 2; i++)
-    	{
-    		while(posY <= endY - blockH * 2 - 2 * gap)
-    		{
-    			blocks.add(new Block(posX, posY, blockH, blockW));
-    			posY += blockW + gap;
-    		}
-    		posY = begY + blockH * 2 + 2 * gap;
-    		posX += blockH + gap;
-    	} 	
-    }
-    
-    public void disappear(Block b, int pos, Graphics window)
-    {
-    	b.draw(window, Color.WHITE);
-    	b.setHeight(0);
-    	b.setWidth(0);
-    	blocks.remove(pos);
-    	
-    	if(isEmpty())
-    	{
-    		ball.setXSpeed(0);
-			ball.setYSpeed(0);
-			ball.draw(window, Color.WHITE);
-    		
-			paddle.draw(window, Color.WHITE);
-			
-    		paddle.setX(400);
-    		paddle.setY(300);
-    		ball.setX(30);
-    		ball.setY(50);
-    		ball.setXSpeed(3);
-    		ball.setYSpeed(1);
-    		drawBlocks();
-    	}
-    }
-    
-    public boolean isEmpty()
-    {
-    	return(blocks.size() == 0);
-    }
+		if(keys[0])
+			paddle.moveUpAndDraw(graphToBack); //need to use graphToBack instead of window 
+		if(keys[1]) 
+			paddle.moveDownAndDraw(graphToBack);
+		if(keys[2])
+			paddle.moveLeftAndDraw(graphToBack);
+		if(keys[3])
+			paddle.moveRightAndDraw(graphToBack);
+		
+		twoDGraph.drawImage(back, null,0,0);
+   }
 
 	public void keyPressed(KeyEvent e)
 	{
@@ -296,6 +258,44 @@ public class Breakout extends Canvas implements KeyListener, Runnable
 			case 'L' : keys[3]=false; break;
 		}
 	}
+	
+	public void drawBlocks()
+	   {
+		   
+		   for(int i = 10; i < 110; i = i + 50)
+		   {
+			   for(int j = 10; j < 760; j = j + 150)
+			   {
+				   blocks.add( new Block(j,i,140,40, Color.YELLOW));
+			   }
+		   }
+		   
+		   for(int k = 460; k < 560; k = k + 50)
+		   {
+			   for(int l = 10; l < 760; l = l + 150)
+			   {
+				   blocks.add(new Block(l,k,140,40, Color.YELLOW));
+			   }
+		   }
+		   
+		   for(int i = 10; i< 310; i = i + 150)
+		   {
+			   for( int j = 110; j < 420; j  = j + 50)
+			   {
+				   blocks.add(new Block(i,j,140,40, Color.YELLOW));
+			   }
+		   }
+		   
+		   for(int i = 460; i < 760; i = i + 150)
+		   {
+			   for(int j = 110; j < 420; j = j + 50)
+			   {
+				   blocks.add(new Block(i,j,140,40,Color.YELLOW));
+			   }
+		   }
+		   
+		    
+	   }
 
 	public void keyTyped(KeyEvent e){}
 	
