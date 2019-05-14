@@ -19,37 +19,44 @@ public class Ammo extends MovingThing
 
 	public Ammo(int x, int y)
 	{
-		//add code
+		this(x, y, 0);
 	}
 
 	public Ammo(int x, int y, int s)
 	{
-		//add code
+		super(x, y, 5, 5);
+		speed = s;
 	}
 
 	public void setSpeed(int s)
 	{
-	   //add code
+	   speed = s;
 	}
 
 	public int getSpeed()
 	{
-	   return 0;
+	   return speed;
 	}
 
 	public void draw( Graphics window )
 	{
-		//add code to draw the ammo
+		window.setColor(Color.YELLOW);
+	    window.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	
 	public void move( String direction )
 	{
 		//add code to draw the ammo
+		//need to add more code?
+		if(direction.equals("UP")) setY(getY() - speed);
+		
+		
+		
 	}
 
 	public String toString()
 	{
-		return "";
+		return super.toString() + getSpeed();
 	}
 }
