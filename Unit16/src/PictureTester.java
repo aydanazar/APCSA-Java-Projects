@@ -158,6 +158,17 @@ public class PictureTester
 	  swan.explore();
   }
   
+  public static void testEncodeDecode()
+  {
+	  Picture beach = new Picture("src/images/beach.jpg");
+	  Picture apple  = new Picture("src/images/apple_icon.jpg");
+	  Picture message  = new Picture("src/images/msg.jpg");
+	  //beach.encode(message);
+	  beach.encode(apple);
+	  beach.explore();
+	  beach.decode().explore();
+  }
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -186,5 +197,6 @@ public class PictureTester
     //testSetRedToHalfValueInTopHalf();
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
+	testEncodeDecode();
   }
 }
