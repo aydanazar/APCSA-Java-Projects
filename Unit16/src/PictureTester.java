@@ -164,6 +164,8 @@ public class PictureTester
 	  Picture apple  = new Picture("src/images/apple_icon.jpg");
 	  Picture message  = new Picture("src/images/msg.jpg");
 	  //beach.encode(message);
+	  //beach.explore();
+	  //apple.explore();
 	  beach.encode(apple);
 	  beach.explore();
 	  beach.decode().explore();
