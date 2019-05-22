@@ -486,21 +486,20 @@ public class Picture extends SimplePicture
 	  int count = 0;
 	  for (int row = 0; row < this.getHeight(); row++) {
 		  for (int col = 0; col < this.getWidth(); col++) {
-			  // if the current pixel red is odd make it even
 			  currPixel = currPixels[row][col];
-			  while (!(currPixel.getBlue() % 3 == 0 || currPixel.getBlue() % 5 == 0)) {
-				  currPixel.setBlue(currPixel.getBlue() - 1);
-			  }
 			  messagePixel = messagePixels[row][col];
+			  while (!(currPixel.getRed() % 5 == 0 || currPixel.getRed() % 9 == 0)) {
+				  currPixel.setRed(currPixel.getRed() - 1);
+				  }
 			  if (messagePixel.colorDistance(Color.BLACK) < 50)
 			  {
-				  while (messagePixel.getBlue() % 3 == 0 || currPixel.getBlue() % 5 == 0) {
-					  currPixel.setBlue(currPixel.getBlue() + 1);
+				  while (currPixel.getRed() % 5 == 0 || currPixel.getRed() % 9 == 0) {
+					  currPixel.setRed(currPixel.getRed() + 1);
 				  }
-				  count++;
-				  }
-			  }
+				  count++; 
+			  }	  
 		  }
+	  }
 	  System.out.println(count);
   }
 
@@ -519,12 +518,12 @@ public class Picture extends SimplePicture
 		  for (int col = 0; col < this.getWidth(); col++){
 			  currPixel = pixels[row][col];
 			  messagePixel = messagePixels[row][col];
-			  if (currPixel.getBlue() % 3 == 0 || currPixel.getBlue() % 5 == 0){
+			  if (!(currPixel.getRed() % 5 == 0 || currPixel.getRed() % 9 == 0)){
 				  messagePixel.setColor(Color.BLACK);
 				  count++;
-				  }
 			  }
-		  }
+		  }  
+	  }
 	  System.out.println(count);
 	  return messagePicture;
   }
